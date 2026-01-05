@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SmartGuard AI – Electricity Theft Detection</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Segoe UI, sans-serif;
+  background:linear-gradient(135deg,#e3f2fd,#fce4ec);
+}
+
+header{
+  background:#0d47a1;
+  color:white;
+  padding:28px;
+  text-align:center;
+}
+
+header h1{margin:0;font-size:40px;}
+header p{opacity:.9}
+
+.container{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  margin:40px;
+  flex-wrap:wrap;
+}
+
+.card{
+  background:white;
+  width:440px;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 15px 25px rgba(0,0,0,.15);
+}
+
+h3{color:#1976d2;margin-top:0}
+
+.reading{font-size:22px;margin:12px 0}
+#status{
+  font-weight:bold;
+  font-size:20px;
+  min-height:28px; /* reserve space */
+}
+
+button{
+  background:#1976d2;
+  color:white;
+  border:none;
+  border-radius:10px;
+  padding:14px 28px;
+  font-size:17px;
+  cursor:pointer;
+}
+button:hover{background:#0d47a1}
+
+/* RHS image */
+.image-panel img{
+  width:100%;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>⚡ SmartGuard AI</h1>
+  <p>Real-Time Electricity Theft Detection & Monitoring System</p>
+</header>
+
+<div class="container">
+
+<!-- LEFT PANEL -->
+<div class="card">
+  <h3>📡 Live Meter Monitoring</h3>
+
+  <p class="reading">Meter ID: <b>MTR-1021</b></p>
+  <p class="reading">Live Usage: <span id="usage">--</span> units</p>
+
+  <p class="reading">Status:</p>
+  <!-- 👇 blank initially -->
+  <p id="status"></p>
+
+  <button onclick="startMonitoring()">▶ Start Live Monitoring</button>
+
+  <p style="font-size:14px;color:#777;margin-top:10px">
+    ⏱ Updates every 5 seconds
+  </p>
+</div>
+
+<!-- RIGHT PANEL -->
+<div class="card image-panel">
+  <img
+    src="https://images.unsplash.com/photo-1548337138-e87d889cc369"
+    alt="Electricity Theft Detection Dashboard">
+</div>
+
+</div>
+
+<script>
+let started = false;
+
+function startMonitoring(){
+  if(started) return;
+  started = true;
+
+  const status = document.getElementById("status");
+
+  // ✅ Show immediately after click
+  status.innerText = "🟢 Monitoring Started";
+  status.style.color = "#1976d2";
+
+  setInterval(()=>{
+    let val = Math.floor(Math.random()*12);
+    document.getElementById("usage").innerText = val;
+
+    if(val < 4){
+      status.innerText = "⚠️ Electricity Theft Detected";
+      status.style.color = "red";
+    }else{
+      status.innerText = "✅ Normal Usage";
+      status.style.color = "green";
+    }
+  },5000);
+}
+</script>
+
+</body>
+</html>
